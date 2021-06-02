@@ -90,7 +90,7 @@ public class RestProductsController {
         if (product.getId() == null || !productsService.existsById(product.getId())){
             throw new ProductNotFoundException("Product is not found, id: " + product.getId());
         }
-        if (product.getPrice() < 0){
+        if (product.getPrice().doubleValue() < 0.0){
             return new ResponseEntity<>("Product's price cannot be negative!", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(productsService.saveOrUpdate(product), HttpStatus.OK);
